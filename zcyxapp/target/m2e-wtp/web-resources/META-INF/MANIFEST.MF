@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: zcyx Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: yangpeng
+Implementation-Vendor-Id: com.yang
+Build-Jdk: 1.8.0_60
+Implementation-URL: http://projects.spring.io/spring-boot/zcyxapp/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

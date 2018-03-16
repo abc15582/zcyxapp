@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>网站访问统计</title>
+<script>
+	console.log('网站访问统计页面')
+</script>
+<style>
+td {     text-align:center; width:160px;}
+thead{ font-size:18px; height:50px;}
+thead tr{height:40px;}
+</style>
+</head>
+<body>
+<h3>菜单点击量统计</h3>
+<table>
+	<thead>
+		<tr>
+			<td>菜单代码</td>
+			<td>菜单名称</td>
+			<td>点击量</td>
+		</tr>
+	</thead>
+	<hr/>
+	<tbody id='logBody'>
+	</tbody>
+</table>
+
+<h3><hr/> </h3>
+<h3>城市点击量统计</h3>
+<table>
+	<thead>
+		<tr>
+			<td>城市</td>
+			<td>点击量</td>
+		</tr>
+	</thead>
+	<hr/>
+	<tbody id='logCity'>
+	</tbody>
+</table>
+<hr/>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(function(){
+	var url;
+	$.getJSON('js/json.txt',function(data){
+		url = data.url;
+		$.ajax({
+			type:'get',
+			url:url+'/menuLog/selectMenuLog',
+			success:function(req){
+				var list = req;
+				var logHtml;
+				for(var i in list){
+					logHtml+='<tr>';
+					logHtml+='<td>'+list[i].menucode+'</td>';
+					logHtml+='<td>'+list[i].menuname+'</td>';
+					logHtml+='<td>'+list[i].clicknum+'</td>';
+					logHtml+='</tr>';
+				}
+				$('#logBody').html(logHtml);
+			}
+		});
+		$.ajax({
+			type:'get',
+			url:url+'/menuLog/selectCity',
+			success:function(req){
+				var map = req;
+				var logHtml;
+				for(var key in map){
+					logHtml+='<tr>';
+					logHtml+='<td>'+key+'</td>';
+					logHtml+='<td>'+map[key]+'</td>';
+					logHtml+='</tr>';
+				}
+				$('#logCity').html(logHtml);
+			}
+		})
+		
+	});
+});
+</script>
+</html>
